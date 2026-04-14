@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.3.9" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.4" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Compile Remove="client-app\**" />
+		<Content Remove="client-app\**" />
+		<EmbeddedResource Remove="client-app\**" />
+		<None Remove="client-app\**" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Areas.Domain\Areas.Domain.csproj" />
+    <ProjectReference Include="..\Areas.Services\Areas.Services.csproj" />
+    <ProjectReference Include="..\Areas.Tools\Areas.Tools.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -9,9 +9,9 @@ namespace Areas.BackOffice.Controllers.LocalAreas;
 public class LocalAreasController(ILocalAreaService localAreasService) : AppController
 {
 	[HttpPost("local_areas/save")]
-	public Result SaveLocalAreas([FromBody] LocalAreaBlank local_areaBlank)
+	public Result SaveLocalAreas([FromBody] LocalAreaBlank localAreaBlank)
 	{
-		return localAreasService.SaveLocalArea(local_areaBlank);
+		return localAreasService.SaveLocalArea(localAreaBlank);
 	}
 
 	[HttpGet("local_areas/get_page")]
@@ -26,7 +26,7 @@ public class LocalAreasController(ILocalAreaService localAreasService) : AppCont
 		return localAreasService.GetLocalArea(localAreaId);
 	}
 
-	[HttpGet("local_areas/mark_product_as_removed")]
+	[HttpGet("local_areas/mark_as_removed")]
 	public Result MarkLocalAreaAsRemoved([FromQuery] Guid localAreaId)
 	{
 		return localAreasService.MarkLocalAreaAsRemoved(localAreaId);

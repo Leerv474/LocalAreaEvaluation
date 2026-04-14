@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.3.9" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.4" />
   </ItemGroup>
 
@@ -16,12 +15,17 @@
 		<Content Remove="client-app\**" />
 		<EmbeddedResource Remove="client-app\**" />
 		<None Remove="client-app\**" />
+    <Content Include="../Areas.Migrator/Migrations/**/*.sql">
+      <Link>Migrations\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
 	</ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Areas.Domain\Areas.Domain.csproj" />
     <ProjectReference Include="..\Areas.Services\Areas.Services.csproj" />
     <ProjectReference Include="..\Areas.Tools\Areas.Tools.csproj" />
+    <ProjectReference Include="..\Areas.Migrator\Areas.Migrator.csproj" />
   </ItemGroup>
 
 </Project>

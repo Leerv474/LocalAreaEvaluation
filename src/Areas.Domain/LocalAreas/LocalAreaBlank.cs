@@ -6,7 +6,7 @@ public class LocalAreaBlank
 {
     public Guid? Id { get; set; }
     public String? Name { get; set; }
-    public AreaType? Type { get; set; }
+    public AreaType? AreaType { get; set; }
     public Int32? Population { get; set; }
     public DateOnly? EstablishmentDate { get; set; }
     public Double? AverageHotelBill { get; set; }

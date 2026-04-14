@@ -33,7 +33,7 @@ public class RegionRepository : IRegionRepository
                 (parameters) =>
                 {
                     parameters.AddWithValue("@r_offset", offset);
-                    parameters.AddWithValue("@r_limit", offset);
+                    parameters.AddWithValue("@r_limit", limit);
                 },
                 (reader) => reader.ToRegionDb()
             )
@@ -46,8 +46,8 @@ public class RegionRepository : IRegionRepository
             Sql.MarkRegionAsRemoved,
             (parameters) =>
             {
-                parameters.AddWithValue("@r_id", regionId);
-                parameters.AddWithValue("@r_currentDateTimeUtc", true);
+                parameters.AddWithValue("@r_regionId", regionId);
+                parameters.AddWithValue("@r_currentDateTimeUtc", DateTime.UtcNow);
             }
         );
     }

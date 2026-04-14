@@ -15,7 +15,7 @@ internal static class LocalAreaConverter
         return new LocalArea(
             localAreaDb.Id,
             localAreaDb.Name,
-            localAreaDb.Type,
+            localAreaDb.AreaType,
             localAreaDb.Population,
             localAreaDb.EstablishmentDate,
             localAreaDb.AverageHotelBill,
@@ -32,11 +32,11 @@ internal static class LocalAreaConverter
             (AreaType)reader.GetInt32(reader.GetOrdinal("areatype")),
             reader.GetInt32(reader.GetOrdinal("population")),
             reader.GetFieldValue<DateOnly>(reader.GetOrdinal("establishmentdate")),
-            reader.GetInt32(reader.GetOrdinal("averagehotelbill")),
+            reader.GetDouble(reader.GetOrdinal("averagehotelbill")),
             reader.GetBoolean(reader.GetOrdinal("isherocity")),
             reader.GetGuid(reader.GetOrdinal("regionid")),
             reader.GetBoolean(reader.GetOrdinal("isremoved")),
-            reader.GetDateTime(reader.GetOrdinal("modifiedat")),
+            reader.IsDBNull(reader.GetOrdinal("modifiedat")) ? null : reader.GetDateTime(reader.GetOrdinal("modifiedat")),
             reader.GetDateTime(reader.GetOrdinal("createdat"))
         );
     }

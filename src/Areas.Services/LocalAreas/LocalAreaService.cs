@@ -22,7 +22,7 @@ public class LocalAreaService(ILocalAreaRepository localAreaRepository) : ILocal
                 $"Название населенного пункта слишком длинное. Максимально допустимо {MAX_LOCAL_AREA_NAME_LENGTH} символов"
             );
         }
-        if (localAreaBlank.Type is null)
+        if (localAreaBlank.AreaType is null)
         {
             return Result.Failed("Введите тип населенного пункта");
         }

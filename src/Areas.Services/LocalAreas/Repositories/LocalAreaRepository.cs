@@ -33,7 +33,7 @@ public class LocalAreaRepository : ILocalAreaRepository
                 (parameters) =>
                 {
                     parameters.AddWithValue("@l_offset", offset);
-                    parameters.AddWithValue("@l_limit", offset);
+                    parameters.AddWithValue("@l_limit", limit);
                 },
                 (reader) => reader.ToLocalAreaDb()
             )
@@ -46,8 +46,8 @@ public class LocalAreaRepository : ILocalAreaRepository
             Sql.MarkLocalAreaAsRemoved,
             (parameters) =>
             {
-                parameters.AddWithValue("@l_id", localAreaId);
-                parameters.AddWithValue("@l_currentDateTimeUtc", true);
+                parameters.AddWithValue("@l_localAreaId", localAreaId);
+                parameters.AddWithValue("@l_currentDateTimeUtc", DateTime.UtcNow);
             }
         );
     }
@@ -60,7 +60,7 @@ public class LocalAreaRepository : ILocalAreaRepository
             {
                 parameters.AddWithValue("l_id", LocalAreaBlank.Id!.Value);
                 parameters.AddWithValue("l_name", LocalAreaBlank.Name!);
-                parameters.AddWithValue("l_areaType", LocalAreaBlank.Type!);
+                parameters.AddWithValue("l_areaType", (Int32)LocalAreaBlank.AreaType!);
                 parameters.AddWithValue("l_population", LocalAreaBlank.Population!);
                 parameters.AddWithValue("l_establishmentDate", LocalAreaBlank.EstablishmentDate!);
                 parameters.AddWithValue("l_averageHotelBill", LocalAreaBlank.AverageHotelBill!);

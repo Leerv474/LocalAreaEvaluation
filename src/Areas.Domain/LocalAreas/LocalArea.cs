@@ -5,7 +5,7 @@ namespace Areas.Domain.LocalAreas;
 public class LocalArea(
     Guid id,
     String name,
-    AreaType type,
+    AreaType areaType,
     Int32 population,
     DateOnly establishmentDate,
     Double averageHotelBill,
@@ -15,7 +15,7 @@ public class LocalArea(
 {
     public Guid Id { get; } = id;
     public String Name { get; } = name;
-    public AreaType Type { get; } = type;
+    public AreaType AreaType { get; } = areaType;
     public Int32 Population { get; } = population;
     public DateOnly EstablishmentDate { get; } = establishmentDate;
     public Double AverageHotelBill { get; } = averageHotelBill;

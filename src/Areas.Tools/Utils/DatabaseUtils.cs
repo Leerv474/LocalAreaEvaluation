@@ -6,7 +6,7 @@ namespace Areas.Tools.Utils;
 public static class DatabaseUtils
 {
     private const String _connectionString =
-        "Server=localhost;Port=5342;Username=postgres;Password:postgres;Database=local_area_db";
+        "Server=localhost;Username=postgres;Password=postgres;Database=local_area_db";
 
     public static Int32 Execute(String sql, Action<NpgsqlParameterCollection> getParameters) =>
         UseSqlCommand(sql, getParameters, (command) => command.ExecuteNonQuery());

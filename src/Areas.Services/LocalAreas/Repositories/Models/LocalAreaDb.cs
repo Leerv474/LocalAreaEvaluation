@@ -5,7 +5,7 @@ namespace Areas.Services.LocalAreas.Repositories.Models;
 public class LocalAreaDb(
     Guid id,
     String name,
-    AreaType type,
+    AreaType areaType,
     Int32 population,
     DateOnly establishmentDate,
     Double averageHotelBill,
@@ -18,7 +18,7 @@ public class LocalAreaDb(
 {
     public Guid Id { get; set; } = id;
     public String Name { get; set; } = name;
-    public AreaType Type { get; set; } = type;
+    public AreaType AreaType { get; set; } = areaType;
     public Int32 Population { get; set; } = population;
     public DateOnly EstablishmentDate { get; set; } = establishmentDate;
     public Double AverageHotelBill { get; set; } = averageHotelBill;

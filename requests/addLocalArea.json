@@ -1,0 +1,9 @@
+{
+  "name": "Калуга",
+  "areaType": 0,
+  "population": 400000,
+  "establishmentDate": "1371-01-01",
+  "averageHotelBill": 3000,
+  "isHeroCity": false,
+  "regionId": "8d720583-d28d-4ddc-bd39-dc441ead91d5"
+}

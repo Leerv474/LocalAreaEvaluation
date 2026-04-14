@@ -9,7 +9,6 @@ internal static class Sql
                 name,
 	        	federaldistrict,
                 platecodes,
-                isremoved,
                 createdat
             )
             VALUES (
@@ -23,7 +22,7 @@ internal static class Sql
 	        	name = @r_name,
 	        	federaldistrict = @r_federalDistrict,
 	        	plateCodes = @r_plateCodes,
-	        	modifiedat= @p_currentDateTimeUtc
+	        	modifiedat= @r_currentDateTimeUtc
         ";
 
     internal static String GetRegionPage =>
@@ -42,7 +41,7 @@ internal static class Sql
         @"
 			UPDATE regions
 			SET isremoved = TRUE,
-				modifiedat = @p_currentDateTimeUtc
+				modifiedat = @r_currentDateTimeUtc
 			WHERE id = @r_regionId
         ";
 }

@@ -1,41 +1,43 @@
-var builder = WebApplication.CreateBuilder(args);
+using System.IO.Compression;
+using Areas.Services;
+using Areas.Tools.Utils.Json;
+using Microsoft.AspNetCore.ResponseCompression;
+using Areas.Migrator;
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+builder.Services.AddHostedService<Migrator>(); 
 
-var app = builder.Build();
+builder.Host.ConfigureServices(
+	(context, serviceCollection) =>
+	{
+		serviceCollection
+			.AddServices()
+			.AddControllersWithViews()
+			.AddJsonOptions(options => TextJsonSerializer.Configure(options.JsonSerializerOptions));
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
+		serviceCollection.AddSingleton<IJsonSerializer>(new TextJsonSerializer());
 
-app.UseHttpsRedirection();
+		serviceCollection.Configure<GzipCompressionProviderOptions>(options =>
+		{
+			options.Level = CompressionLevel.Optimal;
+		});
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+		serviceCollection.AddResponseCompression(options =>
+		{
+			options.EnableForHttps = true;
+			options.Providers.Add<BrotliCompressionProvider>();
+			options.Providers.Add<GzipCompressionProvider>();
+		});
+	}
+);
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+WebApplication app = builder.Build();
+
+app.UseResponseCompression()
+	.UseHttpsRedirection()
+	.UseStaticFiles()
+	.UseRouting()
+	.UseEndpoints(endpoints => endpoints.MapControllers());
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

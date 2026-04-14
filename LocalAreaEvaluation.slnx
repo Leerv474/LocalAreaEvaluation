@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Goods.BackOffice/Goods.BackOffice.csproj" />
+    <Project Path="src/Goods.Domain/Goods.Domain.csproj" />
+    <Project Path="src/Goods.Migrator/Goods.Migrator.csproj" />
+    <Project Path="src/Goods.Services/Goods.Services.csproj" />
+    <Project Path="src/Goods.Tools/Goods.Tools.csproj" />
+  </Folder>
+</Solution>

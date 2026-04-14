@@ -1,0 +1,67 @@
+using Goods.Domain.Regions;
+using Goods.Domain.Regions.Repositories.Queries;
+using Goods.Services.Regions.Repositories.Converters;
+using Goods.Services.Regions.Repositories.Interfaces;
+using Goods.Tools.Types;
+using Goods.Tools.Utils;
+
+public class RegionRepository : IRegionRepository
+{
+    public Region? GetRegion(Guid regionId)
+    {
+        return DatabaseUtils
+            .Get(
+                Sql.GetRegionById,
+                (parameters) =>
+                {
+                    parameters.AddWithValue("@r_regionId", regionId);
+                },
+                (reader) => reader.ToRegionDb()
+            )
+            ?.ToRegion();
+    }
+
+    public Page<Region> GetRegionsPage(int page, int countInPage)
+    {
+        (Int32 offset, Int32 limit) = NumberUtils.NormalizeRange(page, countInPage);
+
+        return DatabaseUtils
+            .GetPage(
+                Sql.GetRegionPage,
+                (parameters) =>
+                {
+                    parameters.AddWithValue("@r_offset", offset);
+                    parameters.AddWithValue("@r_limit", offset);
+                },
+                (reader) => reader.ToRegionDb()
+            )
+            .Convert(regionDb => regionDb.ToRegion());
+    }
+
+    public void MarkRegionAsRemoved(Guid regionId)
+    {
+        DatabaseUtils.Execute(
+            Sql.MarkRegionAsRemoved,
+            (parameters) =>
+            {
+                parameters.AddWithValue("@r_id", regionId);
+                parameters.AddWithValue("@r_currentDateTimeUtc", true);
+            }
+        );
+    }
+
+    public void SaveRegion(RegionBlank RegionBlank)
+    {
+        DatabaseUtils.Execute(
+            Sql.RegionSave,
+            (parameters) =>
+            {
+                parameters.AddWithValue("r_id", RegionBlank.Id!.Value);
+                parameters.AddWithValue("r_name", RegionBlank.Name!);
+                parameters.AddWithValue("r_federalDistrict", RegionBlank.FederalDistrict!);
+                parameters.AddWithValue("r_plateCodes", RegionBlank.PlateCodes!);
+                parameters.AddWithValue("r_currentDateTimeUtc", DateTime.UtcNow);
+            }
+        );
+    }
+}

@@ -1,4 +1,5 @@
 using Areas.Domain.LocalAreas;
+using Areas.Domain.LocalAreas.Enums;
 using Areas.Domain.Services;
 using Areas.Services.LocalAreas.Repositories.Interfaces;
 using Areas.Tools.Types;
@@ -9,6 +10,7 @@ namespace Areas.Services.LocalAreas;
 public class LocalAreaService(ILocalAreaRepository localAreaRepository) : ILocalAreaService
 {
     private const Int32 MAX_LOCAL_AREA_NAME_LENGTH = 255;
+    private const Int32 VALUABLE_LOCAL_AREA_AGE = 140;
 
     public Result SaveLocalArea(LocalAreaBlank localAreaBlank)
     {
@@ -71,5 +73,33 @@ public class LocalAreaService(ILocalAreaRepository localAreaRepository) : ILocal
         }
         localAreaRepository.MarkLocalAreaAsRemoved(localAreaId);
         return Result.Success();
+    }
+
+    public Boolean EvaluateLocalArea(Guid localAreaId)
+    {
+        LocalArea? localArea = GetLocalArea(localAreaId);
+        if (localArea is null)
+        {
+            return false;
+        }
+        if (localArea.IsHeroCity)
+        {
+            return true;
+        }
+        if (localArea.AreaType == AreaType.Village || localArea.AreaType == AreaType.CountrySide)
+        {
+            return false;
+        }
+        int areaAge = DateTime.Today.Year - localArea.EstablishmentDate.Year;
+        if (areaAge >= VALUABLE_LOCAL_AREA_AGE)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public LocalAreaDetails? GetLocalAreaDetails(Guid localAreaId)
+    {
+        return localAreaRepository.GetLocalAreaDetails(localAreaId);
     }
 }

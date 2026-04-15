@@ -70,4 +70,18 @@ public class LocalAreaRepository : ILocalAreaRepository
             }
         );
     }
+
+    public LocalAreaDetails? GetLocalAreaDetails(Guid localAreaId) 
+    {
+        return DatabaseUtils
+            .Get(
+                Sql.GetLocalAreaDetailsById,
+                (parameters) =>
+                {
+                    parameters.AddWithValue("@l_localAreaId", localAreaId);
+                },
+                (reader) => reader.ToLocalAreaDetailsDb()
+            )
+            ?.ToLocalAreaDetails();
+    }
 }

@@ -10,4 +10,6 @@ public interface ILocalAreaService
     Page<LocalArea> GetLocalAreaPage(Int32 page, Int32 countInPage);
     LocalArea? GetLocalArea(Guid localAreaId);
     Result MarkLocalAreaAsRemoved(Guid localAreaId);
+    Boolean EvaluateLocalArea(Guid localAreaId);
+    LocalAreaDetails? GetLocalAreaDetails(Guid localAreaId);
 }

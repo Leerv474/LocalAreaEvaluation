@@ -53,4 +53,23 @@ internal static class Sql
             update local_areas set isremoved = true, modifiedat = @l_currentDateTimeUtc
             where id = @l_localAreaId
         ";
+
+    internal static String GetLocalAreaDetailsById =>
+        @"
+            select 
+                l.id as id,
+                l.name as name,
+                l.areatype as areatype,
+                l.population as population,
+                l.establishmentdate as establishmentdate,
+                l.averagehotelbill as averagehotelbill,
+                l.isherocity as isherocity,
+                r.name as regionname,
+                l.isremoved as isremoved,
+                l.modifiedat as modifiedat,
+                l.createdat as createdat
+            from local_areas l
+            left join regions r on l.regionid = r.id
+            where l.id = @l_localAreaId and not l.isremoved
+        ";
 }

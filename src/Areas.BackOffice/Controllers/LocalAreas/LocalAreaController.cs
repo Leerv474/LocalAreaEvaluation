@@ -31,4 +31,16 @@ public class LocalAreasController(ILocalAreaService localAreasService) : AppCont
 	{
 		return localAreasService.MarkLocalAreaAsRemoved(localAreaId);
 	}
+
+	[HttpGet("local_areas/evaluate")]
+	public Boolean EvaluateLocalArea([FromQuery] Guid localAreaId)
+	{
+		return localAreasService.EvaluateLocalArea(localAreaId);
+	}
+
+	[HttpGet("local_areas/get_details_by_id")]
+	public LocalAreaDetails? GetLocalAreaDetails([FromQuery] Guid localAreaId)
+	{
+		return localAreasService.GetLocalAreaDetails(localAreaId);
+	}
 }

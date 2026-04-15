@@ -1,6 +1,6 @@
 {
   "name": "Калуга",
-  "areaType": 0,
+  "areaType": 1,
   "population": 400000,
   "establishmentDate": "1371-01-01",
   "averageHotelBill": 3000,

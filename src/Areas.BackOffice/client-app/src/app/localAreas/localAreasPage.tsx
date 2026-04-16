@@ -202,28 +202,28 @@ export function LocalAreasPage() {
               {localAreaDetailsList.map((localArea) => {
                 return (
                   <TableRow key={`localArea__${localArea.id}`}>
-                    <TableCell width="14%">{localArea.name}</TableCell>
+                    <TableCell width="10%">{localArea.name}</TableCell>
                     <TableCell width="10%">
                       {AreaType.getDisplayName(localArea.areaType)}
                     </TableCell>
-                    <TableCell width="14%">
+                    <TableCell width="10%">
                       {localArea.population ?? "—"}
                     </TableCell>
-                    <TableCell width="14%">
+                    <TableCell width="10%">
                       {localArea.establishmentDate.toString()}
                     </TableCell>
-                    <TableCell width="14%">
+                    <TableCell width="10%">
                       {localArea.averageHotelBill}
                     </TableCell>
-                    <TableCell width="14%">
+                    <TableCell width="10%">
                       {localArea.isHeroCity ? (
                         <Checkbox disabled checked />
                       ) : (
                         <Checkbox disabled />
                       )}
                     </TableCell>
-                    <TableCell width="14%">{localArea.regionName}</TableCell>
-                    <TableCell width="16%">
+                    <TableCell width="10%">{localArea.regionName}</TableCell>
+                    <TableCell width="10%">
                       <Button
                         type="icon"
                         variant="action"

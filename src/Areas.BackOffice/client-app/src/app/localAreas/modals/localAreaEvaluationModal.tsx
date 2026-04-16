@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AreaType } from "../../../domain/localAreas/enums/areaType";
 import { LocalAreasProvider } from "../../../domain/localAreas/localAreasProvider";
-import { Input } from "../../../shared/components/inputs/input";
 import { Modal } from "../../../shared/components/modals/modal";
 import { Notification } from "../../../shared/components/notification";
 import { TextField, Typography } from "@mui/material";
@@ -55,7 +54,7 @@ export function LocalAreaEvaluationModal(props: Props) {
     <>
       <Modal onClose={() => props.onClose(false)} isOpen={props.isOpen}>
         <Modal.Header onClose={() => props.onClose(false)}>
-          Редактор Населенного пункта
+          Данные населенного пункта
         </Modal.Header>
         <Modal.Body
           sx={{

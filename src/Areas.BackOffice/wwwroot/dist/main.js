@@ -8441,14 +8441,14 @@ function LocalAreasPage() {
                         localAreaDetailsList.map(function (localArea) {
                             var _a;
                             return (react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], { key: "localArea__".concat(localArea.id) },
-                                react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "14%" }, localArea.name),
+                                react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "10%" }, localArea.name),
                                 react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "10%" }, _domain_localAreas_enums_areaType__WEBPACK_IMPORTED_MODULE_11__.AreaType.getDisplayName(localArea.areaType)),
-                                react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "14%" }, (_a = localArea.population) !== null && _a !== void 0 ? _a : "—"),
-                                react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "14%" }, localArea.establishmentDate.toString()),
-                                react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "14%" }, localArea.averageHotelBill),
-                                react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "14%" }, localArea.isHeroCity ? (react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_9__["default"], { disabled: true, checked: true })) : (react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_9__["default"], { disabled: true }))),
-                                react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "14%" }, localArea.regionName),
-                                react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "16%" },
+                                react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "10%" }, (_a = localArea.population) !== null && _a !== void 0 ? _a : "—"),
+                                react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "10%" }, localArea.establishmentDate.toString()),
+                                react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "10%" }, localArea.averageHotelBill),
+                                react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "10%" }, localArea.isHeroCity ? (react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_9__["default"], { disabled: true, checked: true })) : (react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_9__["default"], { disabled: true }))),
+                                react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "10%" }, localArea.regionName),
+                                react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "10%" },
                                     react__WEBPACK_IMPORTED_MODULE_10___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_13__.Button, { type: "icon", variant: "action", title: "\u041E\u0446\u0435\u043D\u0438\u0442\u044C", size: "small", onClick: function () {
                                             return openLocalAreaEvaluationModal(localArea.id);
                                         } }),
@@ -8774,7 +8774,7 @@ function LocalAreaEvaluationModal(props) {
     }, [props.isOpen, props.localAreaId]);
     return (react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null,
         react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_3__.Modal, { onClose: function () { return props.onClose(false); }, isOpen: props.isOpen },
-            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_3__.Modal.Header, { onClose: function () { return props.onClose(false); } }, "\u0420\u0435\u0434\u0430\u043A\u0442\u043E\u0440 \u041D\u0430\u0441\u0435\u043B\u0435\u043D\u043D\u043E\u0433\u043E \u043F\u0443\u043D\u043A\u0442\u0430"),
+            react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_3__.Modal.Header, { onClose: function () { return props.onClose(false); } }, "\u0414\u0430\u043D\u043D\u044B\u0435 \u043D\u0430\u0441\u0435\u043B\u0435\u043D\u043D\u043E\u0433\u043E \u043F\u0443\u043D\u043A\u0442\u0430"),
             react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_shared_components_modals_modal__WEBPACK_IMPORTED_MODULE_3__.Modal.Body, { sx: {
                     maxWidth: "800px",
                     minWidth: "600px",

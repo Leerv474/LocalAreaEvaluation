@@ -38,8 +38,21 @@ internal static class Sql
 
     internal static String GetLocalAreaPage =>
         @"
-			SELECT COUNT(*) OVER() as count, * FROM local_areas
-			WHERE NOT isremoved 
+            select  count(*) over() as count, 
+                l.id as id,
+                l.name as name,
+                l.areatype as areatype,
+                l.population as population,
+                l.establishmentdate as establishmentdate,
+                l.averagehotelbill as averagehotelbill,
+                l.isherocity as isherocity,
+                r.name as regionname,
+                l.isremoved as isremoved,
+                l.modifiedat as modifiedat,
+                l.createdat as createdat
+            from local_areas l
+            left join regions r on l.regionid = r.id
+			WHERE NOT l.isremoved 
 			ORDER BY createdat DESC 
 			OFFSET @l_offset 
 			LIMIT @l_limit

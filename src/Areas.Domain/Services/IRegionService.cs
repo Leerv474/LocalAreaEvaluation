@@ -10,4 +10,5 @@ public interface IRegionService
     Page<Region> GetRegionPage(Int32 page, Int32 countInPage);
     Region? GetRegion(Guid regionId);
     Result MarkRegionAsRemoved(Guid regionId);
+    RegionItem[] GetAllRegionItems();
 }

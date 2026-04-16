@@ -64,7 +64,7 @@ internal static class LocalAreaConverter
         return new LocalAreaDetailsDb(
             reader.GetGuid(reader.GetOrdinal("id")),
             reader.GetString(reader.GetOrdinal("name")),
-            ((AreaType)reader.GetInt32(reader.GetOrdinal("areatype"))).ToString(),
+            (AreaType)reader.GetInt32(reader.GetOrdinal("areatype")),
             reader.GetInt32(reader.GetOrdinal("population")),
             reader.GetFieldValue<DateOnly>(reader.GetOrdinal("establishmentdate")),
             reader.GetDouble(reader.GetOrdinal("averagehotelbill")),

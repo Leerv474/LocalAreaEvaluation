@@ -31,4 +31,10 @@ public class RegionsController(IRegionService regionsService) : AppController
 	{
 		return regionsService.MarkRegionAsRemoved(regionId);
 	}
+
+    [HttpGet("regions/get_all_items")]
+    public RegionItem[] GetAllRegionItems()
+    {
+        return regionsService.GetAllRegionItems();
+    }
 }

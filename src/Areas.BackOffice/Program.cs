@@ -2,10 +2,10 @@ using System.IO.Compression;
 using Areas.Services;
 using Areas.Tools.Utils.Json;
 using Microsoft.AspNetCore.ResponseCompression;
-using Areas.Migrator;
+// using Areas.Migrator;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-builder.Services.AddHostedService<Migrator>(); 
+// builder.Services.AddHostedService<Migrator>(); 
 
 builder.Host.ConfigureServices(
 	(context, serviceCollection) =>

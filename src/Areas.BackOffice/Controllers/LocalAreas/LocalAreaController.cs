@@ -15,7 +15,7 @@ public class LocalAreasController(ILocalAreaService localAreasService) : AppCont
 	}
 
 	[HttpGet("local_areas/get_page")]
-	public Page<LocalArea> GetLocalAreasPage([FromQuery] Int32 page, [FromQuery] Int32 countInPage)
+	public Page<LocalAreaDetails> GetLocalAreasPage([FromQuery] Int32 page, [FromQuery] Int32 countInPage)
 	{
 		return localAreasService.GetLocalAreaPage(page, countInPage);
 	}

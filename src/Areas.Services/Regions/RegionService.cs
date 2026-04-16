@@ -6,17 +6,20 @@ using Areas.Tools.Types.Results;
 
 namespace Areas.Services.Regions;
 
-public class RegionService (IRegionRepository regionRepository): IRegionService
+public class RegionService(IRegionRepository regionRepository) : IRegionService
 {
     public Result SaveRegion(RegionBlank regionBlank)
     {
-        if (String.IsNullOrWhiteSpace(regionBlank.Name)) {
+        if (String.IsNullOrWhiteSpace(regionBlank.Name))
+        {
             return Result.Failed("Введите название региона");
         }
-        if (String.IsNullOrWhiteSpace(regionBlank.FederalDistrict)) {
+        if (regionBlank.FederalDistrict is null)
+        {
             return Result.Failed("Введите название Федерального округа");
         }
-        if (regionBlank.PlateCodes is null or []) {
+        if (regionBlank.PlateCodes is null or [])
+        {
             return Result.Failed("Укажите автомобильные коды");
         }
         regionBlank.PlateCodes = regionBlank.PlateCodes.Distinct().ToArray();
@@ -39,10 +42,16 @@ public class RegionService (IRegionRepository regionRepository): IRegionService
     public Result MarkRegionAsRemoved(Guid regionId)
     {
         Region? existsRegion = GetRegion(regionId);
-        if (existsRegion is null) {
+        if (existsRegion is null)
+        {
             return Result.Failed("Регион не найден");
         }
         regionRepository.MarkRegionAsRemoved(regionId);
         return Result.Success();
+    }
+
+    public RegionItem[] GetAllRegionItems()
+    {
+        return regionRepository.GetAllRegionItems();
     }
 }

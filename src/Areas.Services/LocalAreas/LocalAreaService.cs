@@ -1,16 +1,18 @@
 using Areas.Domain.LocalAreas;
 using Areas.Domain.LocalAreas.Enums;
+using Areas.Domain.Regions;
 using Areas.Domain.Services;
 using Areas.Services.LocalAreas.Repositories.Interfaces;
+using Areas.Services.Regions.Repositories.Interfaces;
 using Areas.Tools.Types;
 using Areas.Tools.Types.Results;
+using Areas.Domain.Regions.Enums;
 
 namespace Areas.Services.LocalAreas;
 
-public class LocalAreaService(ILocalAreaRepository localAreaRepository) : ILocalAreaService
+public class LocalAreaService(ILocalAreaRepository localAreaRepository, IRegionRepository regionRepository) : ILocalAreaService
 {
     private const Int32 MAX_LOCAL_AREA_NAME_LENGTH = 255;
-    private const Int32 VALUABLE_LOCAL_AREA_AGE = 140;
 
     public Result SaveLocalArea(LocalAreaBlank localAreaBlank)
     {
@@ -59,14 +61,14 @@ public class LocalAreaService(ILocalAreaRepository localAreaRepository) : ILocal
         return localAreaRepository.GetLocalArea(localAreaId);
     }
 
-    public Page<LocalArea> GetLocalAreaPage(Int32 page, Int32 countInPage)
+    public Page<LocalAreaDetails> GetLocalAreaPage(Int32 page, Int32 countInPage)
     {
         return localAreaRepository.GetLocalAreaPage(page, countInPage);
     }
 
     public Result MarkLocalAreaAsRemoved(Guid localAreaId)
     {
-        LocalArea? existsLocalArea = GetLocalArea(localAreaId);
+        LocalArea? existsLocalArea = localAreaRepository.GetLocalArea(localAreaId);
         if (existsLocalArea is null)
         {
             return Result.Failed("Населенный пункт не найден.");
@@ -91,7 +93,11 @@ public class LocalAreaService(ILocalAreaRepository localAreaRepository) : ILocal
             return false;
         }
         int areaAge = DateTime.Today.Year - localArea.EstablishmentDate.Year;
-        if (areaAge >= VALUABLE_LOCAL_AREA_AGE)
+        Region? region = regionRepository.GetRegion(localArea.RegionId);
+        if (region is null) {
+            return false;
+        }
+        if (areaAge >= region.FederalDistrict.GetValuableAge())
         {
             return true;
         }

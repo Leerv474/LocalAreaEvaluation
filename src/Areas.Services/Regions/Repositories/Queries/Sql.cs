@@ -37,11 +37,16 @@ internal static class Sql
         @"
             SELECT * FROM regions WHERE id = @r_regionId AND NOT isremoved
         ";
-    internal static String MarkRegionAsRemoved => 
+    internal static String MarkRegionAsRemoved =>
         @"
 			UPDATE regions
 			SET isremoved = TRUE,
 				modifiedat = @r_currentDateTimeUtc
 			WHERE id = @r_regionId
+        ";
+
+    internal static String GetAllRegionItems =>
+        @"
+            select r.id as id, r.name as name from regions r;
         ";
 }

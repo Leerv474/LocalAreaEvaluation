@@ -57,9 +57,26 @@ public static class DatabaseUtils
         );
     }
 
+    public static T[] GetAll<T>(String sql, Func<NpgsqlDataReader, T> mapper)
+    {
+        return UseSqlCommand(
+            sql,
+            null,
+            (command) =>
+            {
+                using NpgsqlDataReader reader = command.ExecuteReader();
+                var results = new List<T>(); 
+                while (reader.Read()) {
+                    results.Add(mapper(reader));
+                }
+                return results.ToArray();
+            }
+        );
+    }
+
     private static T UseSqlCommand<T>(
         String sql,
-        Action<NpgsqlParameterCollection> getParameters,
+        Action<NpgsqlParameterCollection>? getParameters,
         Func<NpgsqlCommand, T> getCommand
     )
     {
@@ -70,7 +87,9 @@ public static class DatabaseUtils
 
         command.Connection = connection;
         command.CommandText = sql;
-        getParameters(command.Parameters);
+        if (getParameters is not null) {
+            getParameters(command.Parameters);
+        }
         return getCommand(command);
     }
 }

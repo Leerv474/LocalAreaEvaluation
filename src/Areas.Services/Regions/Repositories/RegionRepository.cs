@@ -9,6 +9,13 @@ namespace Areas.Services.Regions.Repositories;
 
 public class RegionRepository : IRegionRepository
 {
+    public RegionItem[] GetAllRegionItems()
+    {
+        return DatabaseUtils
+            .GetAll(Sql.GetAllRegionItems, (reader) => reader.ToRegionItemDb())
+            .ToRegionItems();
+    }
+
     public Region? GetRegion(Guid regionId)
     {
         return DatabaseUtils
@@ -60,7 +67,7 @@ public class RegionRepository : IRegionRepository
             {
                 parameters.AddWithValue("r_id", RegionBlank.Id!.Value);
                 parameters.AddWithValue("r_name", RegionBlank.Name!);
-                parameters.AddWithValue("r_federalDistrict", RegionBlank.FederalDistrict!);
+                parameters.AddWithValue("r_federalDistrict", (Int32)RegionBlank.FederalDistrict!);
                 parameters.AddWithValue("r_plateCodes", RegionBlank.PlateCodes!);
                 parameters.AddWithValue("r_currentDateTimeUtc", DateTime.UtcNow);
             }

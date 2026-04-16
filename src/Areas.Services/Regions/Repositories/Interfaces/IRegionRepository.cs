@@ -9,4 +9,5 @@ public interface IRegionRepository
 	Page<Region> GetRegionsPage(Int32 page, Int32 countInPage);
 	Region? GetRegion(Guid RegionId);
 	void MarkRegionAsRemoved(Guid RegionId);
+    RegionItem[] GetAllRegionItems();
 }

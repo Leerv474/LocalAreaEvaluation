@@ -23,7 +23,7 @@ public class LocalAreaRepository : ILocalAreaRepository
             ?.ToLocalArea();
     }
 
-    public Page<LocalArea> GetLocalAreaPage(int page, int countInPage)
+    public Page<LocalAreaDetails> GetLocalAreaPage(int page, int countInPage)
     {
         (Int32 offset, Int32 limit) = NumberUtils.NormalizeRange(page, countInPage);
 
@@ -35,9 +35,9 @@ public class LocalAreaRepository : ILocalAreaRepository
                     parameters.AddWithValue("@l_offset", offset);
                     parameters.AddWithValue("@l_limit", limit);
                 },
-                (reader) => reader.ToLocalAreaDb()
+                (reader) => reader.ToLocalAreaDetailsDb()
             )
-            .Convert(localAreaDb => localAreaDb.ToLocalArea());
+            .Convert(localAreaDetailsDb => localAreaDetailsDb.ToLocalAreaDetails());
     }
 
     public void MarkLocalAreaAsRemoved(Guid localAreaId)

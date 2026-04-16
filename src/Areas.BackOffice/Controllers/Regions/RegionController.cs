@@ -15,7 +15,7 @@ public class RegionsController(IRegionService regionsService) : AppController
 	}
 
 	[HttpGet("regions/get_page")]
-	public Page<Region> GetRegionsPage([FromQuery] Int32 page, [FromQuery] Int32 countInPage)
+	public Page<RegionDetails> GetRegionsPage([FromQuery] Int32 page, [FromQuery] Int32 countInPage)
 	{
 		return regionsService.GetRegionPage(page, countInPage);
 	}

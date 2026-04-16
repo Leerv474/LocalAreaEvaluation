@@ -52,4 +52,28 @@ internal static class RegionConverter
             reader.GetString(reader.GetOrdinal("name"))
         );
     }
+
+    internal static RegionDetailsDb ToRegionDetailsDb(this NpgsqlDataReader reader)
+    {
+        return new RegionDetailsDb(
+            reader.GetGuid(reader.GetOrdinal("id")),
+            reader.GetString(reader.GetOrdinal("name")),
+            (FederalDistrict)reader.GetInt32(reader.GetOrdinal("federaldistrict")),
+            reader.IsDBNull(reader.GetOrdinal("platecodes"))
+                ? Array.Empty<String>()
+                : reader.GetFieldValue<String[]>(reader.GetOrdinal("platecodes")),
+            reader.GetInt32(reader.GetOrdinal("localitycount"))
+        );
+    }
+
+    internal static RegionDetails ToRegionDetails(this RegionDetailsDb regionDetailsDb)
+    {
+        return new RegionDetails(
+            regionDetailsDb.Id,
+            regionDetailsDb.Name,
+            regionDetailsDb.FederalDistrict,
+            regionDetailsDb.PlateCodes,
+            regionDetailsDb.LocalityCount
+        );
+    }
 }

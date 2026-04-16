@@ -9200,6 +9200,7 @@ function RegionsPage() {
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], null, "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435"),
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], null, "\u0424\u0435\u0434\u0435\u0440\u0430\u043B\u044C\u043D\u044B\u0439 \u043E\u043A\u0440\u0443\u0433"),
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], null, "\u0410\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044C\u043D\u044B\u0435 \u043A\u043E\u0434\u044B"),
+                            react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], null, "\u041A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043D\u0430\u0441\u0435\u043B\u0435\u043D\u043D\u044B\u0445 \u043F\u0443\u043D\u043A\u0442\u043E\u0432"),
                             react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], null, "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435"))),
                     react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_8__["default"], null,
                         regions.length === 0 && (react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_6__["default"], null,
@@ -9209,6 +9210,7 @@ function RegionsPage() {
                                 react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "25%" }, region.name),
                                 react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "25%" }, _domain_regions_enums_federalDistrict__WEBPACK_IMPORTED_MODULE_18__.FederalDistrict.getDisplayName(region.federalDistrict)),
                                 react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "25%" }, region.plateCodes.toString()),
+                                react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "25%" }, region.localityCount.toString()),
                                 react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_mui_material__WEBPACK_IMPORTED_MODULE_7__["default"], { width: "25%" },
                                     react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_11__.Button, { type: "icon", variant: "edit", size: "small", onClick: function () { return openRegionEditorModal(region.id); } }),
                                     react__WEBPACK_IMPORTED_MODULE_9___default().createElement(_shared_components_buttons_button__WEBPACK_IMPORTED_MODULE_11__.Button, { type: "icon", variant: "remove", size: "small", onClick: function () {
@@ -9758,6 +9760,46 @@ var RegionBlank;
 
 /***/ }),
 
+/***/ "./src/domain/regions/regionDetails.ts":
+/*!*********************************************!*\
+  !*** ./src/domain/regions/regionDetails.ts ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   RegionDetails: () => (/* binding */ RegionDetails),
+/* harmony export */   mapToRegionDetailList: () => (/* binding */ mapToRegionDetailList),
+/* harmony export */   mapToRegionDetails: () => (/* binding */ mapToRegionDetails),
+/* harmony export */   mapToRegionDetailsPage: () => (/* binding */ mapToRegionDetailsPage)
+/* harmony export */ });
+/* harmony import */ var _tools_types_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/types/page */ "./src/tools/types/page.ts");
+
+var RegionDetails = /** @class */ (function () {
+    function RegionDetails(id, name, federalDistrict, plateCodes, localityCount) {
+        this.id = id;
+        this.name = name;
+        this.federalDistrict = federalDistrict;
+        this.plateCodes = plateCodes;
+        this.localityCount = localityCount;
+    }
+    return RegionDetails;
+}());
+
+function mapToRegionDetailsPage(data) {
+    return _tools_types_page__WEBPACK_IMPORTED_MODULE_0__.Page.convert(data, mapToRegionDetails);
+}
+function mapToRegionDetailList(data) {
+    return data.map(mapToRegionDetails);
+}
+function mapToRegionDetails(data) {
+    return new RegionDetails(data.id, data.name, data.federalDistrict, data.plateCodes, data.localityCount);
+}
+
+
+/***/ }),
+
 /***/ "./src/domain/regions/regionItem.ts":
 /*!******************************************!*\
   !*** ./src/domain/regions/regionItem.ts ***!
@@ -9802,7 +9844,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _tools_types_results_result__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/types/results/result */ "./src/tools/types/results/result.ts");
 /* harmony import */ var _region__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./region */ "./src/domain/regions/region.ts");
-/* harmony import */ var _regionItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./regionItem */ "./src/domain/regions/regionItem.ts");
+/* harmony import */ var _regionDetails__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./regionDetails */ "./src/domain/regions/regionDetails.ts");
+/* harmony import */ var _regionItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./regionItem */ "./src/domain/regions/regionItem.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -9839,6 +9882,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+
 
 
 
@@ -9879,7 +9923,7 @@ var RegionsProvider = /** @class */ (function () {
                         return [4 /*yield*/, response.json()];
                     case 2:
                         json = _a.sent();
-                        return [2 /*return*/, (0,_region__WEBPACK_IMPORTED_MODULE_1__.mapToRegionsPage)(json)];
+                        return [2 /*return*/, (0,_regionDetails__WEBPACK_IMPORTED_MODULE_2__.mapToRegionDetailsPage)(json)];
                 }
             });
         });
@@ -9936,7 +9980,7 @@ var RegionsProvider = /** @class */ (function () {
                         return [4 /*yield*/, response.json()];
                     case 2:
                         json = _a.sent();
-                        return [2 /*return*/, (0,_regionItem__WEBPACK_IMPORTED_MODULE_2__.mapToRegionItems)(json)];
+                        return [2 /*return*/, (0,_regionItem__WEBPACK_IMPORTED_MODULE_3__.mapToRegionItems)(json)];
                 }
             });
         });

@@ -49,4 +49,16 @@ internal static class Sql
         @"
             select r.id as id, r.name as name from regions r;
         ";
+
+    internal static String GetRegionDetailsPage =>
+        @"
+			SELECT COUNT(*) OVER() as count, r.id as id, r.name as name, r.federaldistrict as federaldistrict, r.platecodes as platecodes, count(l.id) as localitycount FROM regions r
+            inner join local_areas l
+            on l.regionid = r.id
+			WHERE NOT r.isremoved 
+            group by r.id
+			ORDER BY r.createdat DESC 
+			OFFSET @r_offset 
+			LIMIT @r_limit
+        ";
 }

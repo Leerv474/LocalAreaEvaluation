@@ -10,7 +10,6 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Region } from "../../domain/regions/region";
 import { RegionsProvider } from "../../domain/regions/regionProvider";
 import { Button } from "../../shared/components/buttons/button";
 import { ConfirmModal } from "../../shared/components/modals/confirmModal";
@@ -20,6 +19,7 @@ import { ConfirmModalState } from "../../shared/types/confirmModalState";
 import { Pagination } from "../../tools/types/pagination";
 import { RegionEditorModal } from "./modals/regionEditorModal";
 import { FederalDistrict } from "../../domain/regions/enums/federalDistrict";
+import { RegionDetails } from "../../domain/regions/regionDetails";
 
 type RegionEditorModalState = {
   regionId: string | null;
@@ -31,7 +31,7 @@ interface RemoveRegionConfirmModalState extends ConfirmModalState {
 }
 
 export function RegionsPage() {
-  const [regions, setRegions] = useState<Region[]>([]);
+  const [regions, setRegions] = useState<RegionDetails[]>([]);
   const [pagination, setPagination] = useState<Pagination>(Pagination.default);
 
   const [regionEditorModalState, setRegionEditorModalState] =
@@ -153,6 +153,7 @@ export function RegionsPage() {
                 <TableCell>Название</TableCell>
                 <TableCell>Федеральный округ</TableCell>
                 <TableCell>Автомобильные коды</TableCell>
+                <TableCell>Количество населенных пунктов</TableCell>
                 <TableCell>Управление</TableCell>
               </TableRow>
             </TableHead>
@@ -171,6 +172,9 @@ export function RegionsPage() {
                     </TableCell>
                     <TableCell width="25%">
                       {region.plateCodes.toString()}
+                    </TableCell>
+                    <TableCell width="25%">
+                      {region.localityCount.toString()}
                     </TableCell>
                     <TableCell width="25%">
                       <Button

@@ -30,21 +30,21 @@ public class RegionRepository : IRegionRepository
             ?.ToRegion();
     }
 
-    public Page<Region> GetRegionsPage(int page, int countInPage)
+    public Page<RegionDetails> GetRegionsPage(int page, int countInPage)
     {
         (Int32 offset, Int32 limit) = NumberUtils.NormalizeRange(page, countInPage);
 
         return DatabaseUtils
             .GetPage(
-                Sql.GetRegionPage,
+                Sql.GetRegionDetailsPage,
                 (parameters) =>
                 {
                     parameters.AddWithValue("@r_offset", offset);
                     parameters.AddWithValue("@r_limit", limit);
                 },
-                (reader) => reader.ToRegionDb()
+                (reader) => reader.ToRegionDetailsDb()
             )
-            .Convert(regionDb => regionDb.ToRegion());
+            .Convert(regionDetailsDb => regionDetailsDb.ToRegionDetails());
     }
 
     public void MarkRegionAsRemoved(Guid regionId)

@@ -7,7 +7,7 @@ namespace Areas.Domain.Services;
 public interface IRegionService
 {
     Result SaveRegion(RegionBlank regionBlank);
-    Page<Region> GetRegionPage(Int32 page, Int32 countInPage);
+    Page<RegionDetails> GetRegionPage(Int32 page, Int32 countInPage);
     Region? GetRegion(Guid regionId);
     Result MarkRegionAsRemoved(Guid regionId);
     RegionItem[] GetAllRegionItems();

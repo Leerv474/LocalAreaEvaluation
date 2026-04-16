@@ -34,7 +34,7 @@ public class RegionService(IRegionRepository regionRepository) : IRegionService
         return regionRepository.GetRegion(regionId);
     }
 
-    public Page<Region> GetRegionPage(int page, int countInPage)
+    public Page<RegionDetails> GetRegionPage(int page, int countInPage)
     {
         return regionRepository.GetRegionsPage(page, countInPage);
     }

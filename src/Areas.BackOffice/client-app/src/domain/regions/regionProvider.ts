@@ -1,7 +1,8 @@
 import { Page } from "../../tools/types/page";
 import { Result } from "../../tools/types/results/result";
-import { mapToRegion, mapToRegionsPage, Region } from "./region";
+import { mapToRegion, Region } from "./region";
 import { RegionBlank } from "./regionBlank";
+import { mapToRegionDetailsPage, RegionDetails } from "./regionDetails";
 import { mapToRegionItems, RegionItem } from "./regionItem";
 
 export class RegionsProvider {
@@ -24,7 +25,7 @@ export class RegionsProvider {
   public static async getRegionsPage(
     page: number,
     countInPage: number,
-  ): Promise<Page<Region>> {
+  ): Promise<Page<RegionDetails>> {
     const response = await fetch(
       `/regions/get_page?page=${page}&countInPage=${countInPage}`,
       {
@@ -34,7 +35,7 @@ export class RegionsProvider {
     );
     const json = await response.json();
 
-    return mapToRegionsPage(json);
+    return mapToRegionDetailsPage(json);
   }
 
   public static async getRegionById(regionId: string): Promise<Region | null> {
